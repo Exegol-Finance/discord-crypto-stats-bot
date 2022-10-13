@@ -5,8 +5,17 @@ from schema import Schema
 from discord.ext import tasks
 from web3 import Web3
 
-schema = Schema({"address": str, "function_name": str,
-                "abi": str, "token": str, "rpc": str, "interval": int})
+schema = Schema(
+    {
+        "address": str,
+        "function_name": str,
+        "abi": str,
+        "token": str,
+        "rpc": str,
+        "interval": int,
+        "status": str,
+    }
+)
 
 with open("config.yaml", "r") as configfile:
     config = yaml.safe_load(configfile)
@@ -29,7 +38,11 @@ async def on_ready():
 
 @tasks.loop(minutes=config.get("interval"))
 async def updateTVL():
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="Exegol TVL"))
+    await client.change_presence(
+        activity=discord.Activity(
+            type=discord.ActivityType.watching, name=config.get("status")
+        )
+    )
     totalSupply = getattr(contract.functions, function_name)().call()
     formattedSupply = f"${round((totalSupply / math.pow(10,6)), 2)}"
     try:

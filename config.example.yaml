@@ -1,6 +1,7 @@
+abi: "Contract ABI"
 address: "Your Contract Address"
 function_name: "Function to call"
-abi: "Contract ABI"
-token: "Discord Bot Token"
-rpc: "RPC for the chain your contract is on"
 interval: 10 # minutes
+rpc: "RPC for the chain your contract is on"
+status: "A string"
+token: "Discord Bot Token"
