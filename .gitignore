@@ -1,0 +1,4 @@
+env/
+abi/*
+!abi/ERC20-abi.json
+config.yaml
